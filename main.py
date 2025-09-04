@@ -1,4 +1,4 @@
-﻿import os
+import os
 import asyncio
 import aiohttp
 import math
@@ -418,6 +418,8 @@ async def main():
         logger.error("TELEGRAM_BOT_TOKEN no configurado")
         return
     
+    logger.info(f"Iniciando con token: {bot_token[:10]}...")
+    
     # Crear instancia del bot
     bot = WeatherBot(bot_token)
     
@@ -429,11 +431,11 @@ async def main():
     port = int(os.getenv('PORT', 8080))
     site = web.TCPSite(runner, '0.0.0.0', port)
     
-    # Ejecutar servidor y bot concurrentemente
-    await asyncio.gather(
-        site.start(),
-        bot.run()
-    )
+    logger.info(f"Servidor web iniciando en puerto {port}")
+    await site.start()
+    
+    # Ejecutar solo el bot (el servidor ya está iniciado)
+    await bot.run()
 
 if __name__ == '__main__':
     asyncio.run(main())
