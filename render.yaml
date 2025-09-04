@@ -1,11 +1,11 @@
-﻿services:
+services:
   - type: web
-    name: weather-telegram-bot
+    name: prono4daysbot
     env: python
     buildCommand: pip install -r requirements.txt
     startCommand: python main.py
     envVars:
-      - key: TELEGRAM_BOT_TOKEN
-        sync: false
+      - key: BOT_TOKEN
+        value: YOUR_TELEGRAM_BOT_TOKEN_HERE
       - key: PORT
-        value: "8080"
+        value: 10000
